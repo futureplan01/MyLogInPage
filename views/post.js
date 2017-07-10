@@ -13,12 +13,9 @@ firstButton.onclick = function (err){
 	}else{
 		var buttonName = firstButton.name;
 		if(buttonName === "Log in"){
-			// register.checkDatabase(username,password);
-
-			
+			register.checkDatabase(username,password);
 		}else{
-			// register.insert(username,password);
-			
+			register.insert(username,password);
 		}
 	}
 }
