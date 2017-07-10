@@ -1,0 +1,26 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "mysql": "^2.13.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futureplan01/MyLogInPage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/futureplan01/MyLogInPage/issues"
+  },
+  "homepage": "https://github.com/futureplan01/MyLogInPage#readme"
+}
