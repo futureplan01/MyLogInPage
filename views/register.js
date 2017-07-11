@@ -24,6 +24,7 @@ module.exports = {
 	},
 
 	insert: function (username, password){
+		console.log("YOOO");
 		con.connect (function(err){
 			if (err) throw err;
 			console.log("Connected!");
