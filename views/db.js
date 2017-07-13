@@ -7,24 +7,29 @@ var con = mysql.createConnection ({
 });
 
 module.exports = {
+	checkDatabase: function (username,password){
+		con.connect(function(err){
+			if(err) console.log("there was an error \n\n " + err);
 
-	checkDatabase: function (username, password){
-		console.log("So whats up");
-		con.connect (function(err){
-			if (err) throw err;
+			// No error
+			console.log("connected to the db successfully");
+
 			con.query(`SELECT * FROM login WHERE userName ='${username}'  AND password = '${password}'`, function (err, result){
-				if(err) throw err;
-				if(result[0].userName === username && result[0].password === password ){
-					console.log("YOU ARE IN");
-				} // 
-				else{
-					console.log("There is no record of that username/password combination");
-				}
+				if(err) console.log("there was an error \n\n " + err);
+				else console.log("success");
 			})
-			console.log("Finished Checking!!")
-		});
+		})
 	},
+	login: function (username, password){
+		con.connect(function(err){
+			if(err) throw err;
 
+			con.query("SELECT * FROM login WHERE userName ='" + username +"'", function (err, result){
+				if(err) console.log("there was an error \n\n " + err);
+				else console.log("success");
+			})
+		})
+	},
 	insert: function (username, password){
 		console.log("Inserting Into");
 		con.connect (function(err){
@@ -40,3 +45,35 @@ module.exports = {
 
 
 };
+
+
+/*
+
+
+
+
+
+		checkDatabase: function (username, password){
+		con.connect (function(err){
+			if (err) {
+				console.log("Could not connect to Database");
+				return false;
+			}
+			else{
+			   	con.query(`SELECT * FROM login WHERE userName ='${username}'  AND password = '${password}'`, function (err, result){
+			   		if(err){
+			   			console.log("Something wrong with username/password");
+			   		}
+				    if(result[0].password === password ){
+					 console.log("YOU ARE IN");
+				    } // 
+				    else{
+					 console.log("There is no record of that username/password combination");
+				    } 
+			})
+			console.log("Finished Checking!!")
+			return true;
+		}
+		});
+	}
+*/

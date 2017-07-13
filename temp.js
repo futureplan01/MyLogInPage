@@ -25,20 +25,23 @@ app.get('/',function (req,res) {
 app.post('/log_in',function (req, res){
 	var user = req.body.userName;
 	var password = req.body.passWord;
-	console.log("Password: " + password + "\n UserName is: " + user);
-	db.checkDatabase(user,password); // what's happening here
-	return res.redirect("/welcome");
+	console.log("Password: " + password + " type is: " 
+		+ typeof(password) + "\n UserName is: " + user + " type is: " + typeof(user));
+	if(db.checkDatabase(user,password)){ // what's happening here
+		return res.redirect("/welcome");
+	}
 })
 
 app.get('/welcome', function (req,res){
 	res.sendFile(__dirname + "/views/welcome.html");
 });
 
-
 app.post('/signup',function (req, res){
 	var user = req.body.userName;
 	var user = req.body.passWord;
-
+    console.log("Password: " + password + "\n UserName is: " + user);
+    db.insert(user,password);
+    return res.redirect("/welcome");
 })
 
 app.listen (port,function (err) {

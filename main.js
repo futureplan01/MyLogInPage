@@ -11,18 +11,38 @@ app.set('view engine', 'ejs');
 
 // For Post Request
 app.use(bodyParser.urlencoded({
-	extended: true
+	extended: false
 }));
 
 // uses static files
-app.use(express.static("views"))
+app.use(express.static(__dirname + '/views'));
+
 app.get('/',function (req,res) {
 	res.sendFile("index.html");
 });
 
 // Log in Page.....
-app.post('/log_in.html',function (req, res){
-	console.log("Getting this stuff to work"); // undefined... 
+app.post('/log_in',function (req, res){
+	var user = req.body.userName;
+	var password = req.body.passWord;
+	console.log("Password: " + password + "\n UserName is: " + user);
+	idb.checkDatabase(user,password) // what's happening here
+	return res.json({success: true});
+	
+})
+
+app.get('/welcome', function (req,res){
+	res.sendFile(__dirname + "/views/welcome.html");
+});
+
+
+app.post('/signup',function (req, res){
+	var user = req.body.userName;
+	var user = req.body.passWord;
+    console.log("Password: " + password + "\n UserName is: " + user);
+    db.insert(user,password);
+    return res.redirect("/welcome");
+
 })
 
 app.listen (port,function (err) {
@@ -31,3 +51,5 @@ app.listen (port,function (err) {
 	}
 	console.log(`server is listening on ${port}`);
 })
+
+

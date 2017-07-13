@@ -10,16 +10,25 @@ module.exports = {
 
 	checkDatabase: function (username, password){
 		con.connect (function(err){
-			if (err) throw err;
+			if (err) {
+				throw err;
+				return false;
+			}
 			con.query(`SELECT * FROM login WHERE userName ='${username}'  AND password = '${password}'`, function (err, result){
-				if(err) throw err;
-				if(result[0].userName === username && result[0].password === password ){
+				if(err) {
+					throw err;
+					return false;
+				}
+				if(result.length === 0){
+					console.log("There is no record of that username/password combination");
+					return false;
+				}
+				else if (result[0].password === password ){
 					console.log("YOU ARE IN");
 				} // 
-				else{
-					console.log("There is no record of that username/password combination");
-				}
+
 			})
+			done();
 		});
 	},
 
