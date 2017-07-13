@@ -6,25 +6,39 @@ var router = express.Router();
 var db = require("./db.js");
 const port = 3000;
 
-
+// Sets Engine to use ejs files
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-app.use(express.static("views"))
-app.get('/',function (req,res) {
-	//res.send("WHats uppppppp"); 
- var html = '<form action="/" method="post">' +
-               'Enter your name:' +
-               '<input type="text" name="userName" placeholder="..." />' +
-               '<br>' +
-               '<button type="submit">Submit</button>' +
-            '</form>';
 
- res.send(html);
+// For Post Request
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
+
+// uses static files
+app.use(express.static(__dirname + '/views'));
+
+app.get('/',function (req,res) {
+	res.sendFile("index.html");
 });
-app.post('/',function (req, res){
-	console.log(req.body.userName); // undefined... 
+
+// Log in Page.....
+app.post('/log_in',function (req, res){
+	var user = req.body.userName;
+	var password = req.body.passWord;
+	console.log("Password: " + password + "\n UserName is: " + user);
+	db.checkDatabase(user,password); // what's happening here
+	return res.redirect("/welcome");
+})
+
+app.get('/welcome', function (req,res){
+	res.sendFile(__dirname + "/views/welcome.html");
+});
+
+
+app.post('/signup',function (req, res){
+	var user = req.body.userName;
+	var user = req.body.passWord;
+
 })
 
 app.listen (port,function (err) {

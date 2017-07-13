@@ -9,6 +9,7 @@ var con = mysql.createConnection ({
 module.exports = {
 
 	checkDatabase: function (username, password){
+		console.log("So whats up");
 		con.connect (function(err){
 			if (err) throw err;
 			con.query(`SELECT * FROM login WHERE userName ='${username}'  AND password = '${password}'`, function (err, result){
@@ -20,11 +21,12 @@ module.exports = {
 					console.log("There is no record of that username/password combination");
 				}
 			})
+			console.log("Finished Checking!!")
 		});
 	},
 
 	insert: function (username, password){
-		console.log("YOOO");
+		console.log("Inserting Into");
 		con.connect (function(err){
 			if (err) throw err;
 			console.log("Connected!");

@@ -18,13 +18,13 @@
 			<div class = "login-page">	
 			<!-- This is for the log in page-->
 			<div class = "form">
-			<form>
+			<form action = "/log_in" method = "post">
 				<div class = "col-xs-offset-5 box">
-					<input type="text" placeholder ="email address">
+					<input type="text" name= "userName" placeholder ="email address">
 				</div>
 				<br>
 				    <div class = "col-xs-offset-5 box">
-					   <input type="password" placeholder ="password">
+					   <input type="password" name= "passWord" placeholder ="password">
 					</div>
 				<br>
 				<div class = "col-xs-offset-5 button">
@@ -39,7 +39,6 @@
 		</div>
 		</div>
 	</div>
-	<script src = "post.js"></script>
 </body>
 
 </html>
