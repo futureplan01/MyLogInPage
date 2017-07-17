@@ -8,30 +8,37 @@ var con = mysql.createConnection ({
 
 module.exports = {
 
-	checkDatabase: function (username, password){
+	checkDatabase: function (username, password, callback){
+		/* 
+		At the end of my function, I want to return
+		the variable value to the user...
+		*/
+		var value = false;
+
 		con.connect (function(err){
 			if (err) {
-				throw err;
-				return false;
+				callback("could not connect", false);
 			}
 			con.query(`SELECT * FROM login WHERE userName ='${username}'  AND password = '${password}'`, function (err, result){
+				console.log(result);
 				if(err) {
-					throw err;
-					return false;
+					callback("no username", false);
 				}
-
 				if(result.length === 0){
-					console.log("There is no record of that username/password combination");
-					return false;
+					callback("There is no record of that username/password combination",false);
 				}
-				
 				else if (result[0].password === password ){
-					console.log("YOU ARE IN");
+					console.log(result);
+					callback(null, true);
 				} // 
-
 			})
+
 			con.end();
+
+	
+			
 		});
+
 	},
 
 	insert: function (username, password){

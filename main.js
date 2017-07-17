@@ -25,20 +25,31 @@ app.get('/',function (req,res) {
 app.get('/login',function (req, res){
 	res.render(__dirname + "/views/login.ejs");
 })
+
 // Log in Page.....
 app.post('/login',function (req, res){
 	var user = req.body.userName;
 	var password = req.body.passWord;
-	if(db.checkDatabase(user,password)){
-		res.sendFile("welcome.html");
-	}else{
-		res.render("login", {Error: false});
-	}
-})
+
+	db.checkDatabase(user,password, function (err,val){
+		if(err){ 
+
+			console.log("Main: " + err);
+		}
+
+		console.log("MAIN: " + val);
+
+		if(val){
+			res.sendFile(__dirname + "/views/welcome.html");
+		}else{
+			res.render("login", {Error: false});
+		}
+    });
+
+});
 app.get('/welcome', function (req,res){
 	res.sendFile(__dirname + "/views/welcome.html");
 });
-
 
 
 app.get('/signup',function (req, res){
