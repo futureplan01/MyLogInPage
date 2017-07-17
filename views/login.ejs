@@ -1,0 +1,50 @@
+<!Doctype html>
+
+<html> 
+<header> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="style.css">
+
+		<title>JJ Log In Page</title>
+</header>
+<body>
+	<div class = "container">
+		<div class = "row">
+		
+			<div class = "col-xs-offset-3" >
+			   <div id = "top-header" ><h1> Welcome to My Page </h1> </div>
+			</div>
+			<div class = "login-page">	
+			<!-- This is for the log in page-->
+			<div class = "form">
+
+			<div class = "wrong info"> 
+				<% if(Error) { %>
+				<p> "There is a problem with your username/password combination, Please try again"</p>
+				<% } %>
+			</div>
+			<form action = "/log_in" method = "post">
+				<div class = "col-xs-offset-5 box">
+					<input type="text" name= "userName" placeholder ="email address">
+				</div>
+				<br>
+				    <div class = "col-xs-offset-5 box">
+					   <input type="password" name= "passWord" placeholder ="password">
+					</div>
+				<br>
+				<div class = "col-xs-offset-5 button">
+				   <button>Log in</button>
+				</div>
+				<div class = "col-xs-offset-5 box">
+				   <br>
+				   <p class = "message"> Not Registered? <a href = "signup.html"> Create an account </a></p>
+				</div>
+			</form>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -19,16 +19,18 @@ module.exports = {
 					throw err;
 					return false;
 				}
+
 				if(result.length === 0){
 					console.log("There is no record of that username/password combination");
 					return false;
 				}
+				
 				else if (result[0].password === password ){
 					console.log("YOU ARE IN");
 				} // 
 
 			})
-			done();
+			con.end();
 		});
 	},
 

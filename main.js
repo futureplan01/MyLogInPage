@@ -21,21 +21,29 @@ app.get('/',function (req,res) {
 	res.sendFile("index.html");
 });
 
+// Which page goes t
+app.get('/login',function (req, res){
+	res.render(__dirname + "/views/login.ejs");
+})
 // Log in Page.....
-app.post('/log_in',function (req, res){
+app.post('/login',function (req, res){
 	var user = req.body.userName;
 	var password = req.body.passWord;
-	console.log("Password: " + password + "\n UserName is: " + user);
-	idb.checkDatabase(user,password) // what's happening here
-	return res.json({success: true});
-	
+	if(db.checkDatabase(user,password)){
+		res.sendFile("welcome.html");
+	}else{
+		res.render("login", {Error: false});
+	}
 })
-
 app.get('/welcome', function (req,res){
 	res.sendFile(__dirname + "/views/welcome.html");
 });
 
 
+
+app.get('/signup',function (req, res){
+
+})
 app.post('/signup',function (req, res){
 	var user = req.body.userName;
 	var user = req.body.passWord;

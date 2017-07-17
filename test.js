@@ -1,6 +1,58 @@
+const express = require("express");
+const app = express();
+var bodyParser = require("body-parser");
+var path = require('path');
+var dbConnection = true;
+var router = express.Router();
 var db = require("./db.js");
+const port = 3000;
 
-var user = "Hello";
-var pass = "Ahola";
+// Sets Engine to use ejs files
+app.set('view engine', 'ejs');
 
-db.login(user,pass)
+// For Post Request
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
+
+// uses static files
+app.use(express.static(__dirname + '/views'));
+
+app.get('/',function (req,res) {
+	res.sendFile("index.html");
+});
+
+// Log in Page.....
+app.post('/log_in',function (req, res){
+	var user = req.body.userName;
+	var password = req.body.passWord;
+	console.log("Password: " + password + "\n UserName is: " + user);
+	idb.checkDatabase(user,password) // what's happening here
+	return res.json({success: true});
+	
+})
+app.get('/login',function (req, res){
+	res.render("login", {Error: false});
+});
+app.get('/welcome', function (req,res){
+	res.sendFile(__dirname + "/views/welcome.html");
+});
+
+
+app.post('/signup',function (req, res){
+	var user = req.body.userName;
+	var user = req.body.passWord;
+    console.log("Password: " + password + "\n UserName is: " + user);
+    db.insert(user,password);
+    return res.redirect("/welcome");
+
+})
+
+app.listen (port,function (err) {
+	if(err){
+		return console.log("no bueno");
+	}
+	console.log(`server is listening on ${port}`);
+})
+
+
