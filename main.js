@@ -31,6 +31,8 @@ app.post('/login',function (req, res){
 	var user = req.body.userName;
 	var password = req.body.passWord;
 
+	console.log("MAIN: user: " + user + "\npassword: " + password);
+
 	db.check(user,password, function (err,val){
 		if(err){ 
 			console.log("Main: " + err);
